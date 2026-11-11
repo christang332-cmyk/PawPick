@@ -1,0 +1,340 @@
+import '../domain/models/product.dart';
+
+const productIdAliases = <String, String>{
+  'dog-heart-sweater': 'dog-strawberry-sweater',
+  'cat-sherpa-hoodie': 'cat-heart-sweater',
+  'dog_heart_sweater': 'dog-strawberry-sweater',
+  'cat_sherpa_hoodie': 'cat-heart-sweater',
+};
+
+const _sizes = ['XS', 'S', 'M', 'L', 'XL'];
+
+List<ProductVariant> _garmentVariants(String prefix) => [
+      for (var colorIndex = 0; colorIndex < 3; colorIndex++)
+        for (var sizeIndex = 0; sizeIndex < _sizes.length; sizeIndex++)
+          ProductVariant(
+            id: '$prefix-$colorIndex-${_sizes[sizeIndex]}',
+            colorName: ['Blush', 'Sky', 'Butter'][colorIndex],
+            colorHex: [0xFFF4B5CF, 0xFFB9E1F1, 0xFFFAE88B][colorIndex],
+            size: _sizes[sizeIndex],
+            stock: colorIndex == 1 && sizeIndex == 3
+                ? 0
+                : (sizeIndex == 2 ? 2 : 8),
+          ),
+    ];
+
+final products = <Product>[
+  Product(
+    id: 'dog-strawberry-sweater',
+    name: 'Strawberry sweater',
+    description: 'A cozy knit layer for crisp walks and cuddly naps.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 99900,
+    images: const [
+      'assets/images/products/garments/dog/dog_strawberry_sweater.jpg'
+    ],
+    rating: 4.9,
+    reviewCount: 48,
+    stock: 20,
+    badge: 'BESTSELLER',
+    variants: _garmentVariants('strawberry'),
+  ),
+  Product(
+    id: 'dog-sherpa-hoodie',
+    name: 'Sherpa plaid hoodie dress',
+    description: 'A soft hooded plaid dress with plush warmth for tiny explorers.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 79900,
+    images: const ['assets/images/products/garments/dog/dog_sherpa_hoodie.jpg'],
+    rating: 4.8,
+    reviewCount: 26,
+    stock: 20,
+    variants: _garmentVariants('sherpa'),
+  ),
+  Product(
+    id: 'dog-preppy-dress',
+    name: 'Preppy knit dress',
+    description: 'A cheerful cable knit dress with a classic plaid skirt.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 79900,
+    images: const [
+      'assets/images/products/garments/dog/dog_preppy_cable_dress.jpg'
+    ],
+    rating: 4.7,
+    reviewCount: 19,
+    stock: 12,
+    variants: _garmentVariants('preppy'),
+  ),
+  Product(
+    id: 'cat-heart-sweater',
+    name: 'Heart knit sweater',
+    description: 'A soft pink heart-knit sweater made for tiny indoor explorers.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 74900,
+    images: const ['assets/images/products/garments/cat/cat_heart_sweater.jpg'],
+    rating: 4.8,
+    reviewCount: 21,
+    stock: 12,
+    variants: _garmentVariants('cat-heart'),
+  ),
+  Product(
+    id: 'cat-faux-fur-dress',
+    name: 'Velvet bow dress',
+    description: 'Cream faux fur finished with a sweet velvet bow.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 89900,
+    images: const [
+      'assets/images/products/garments/cat/cat_faux_fur_dress.jpg'
+    ],
+    rating: 4.9,
+    reviewCount: 14,
+    stock: 9,
+    variants: _garmentVariants('fur'),
+  ),
+  Product(
+    id: 'cat-shark-costume',
+    name: 'Shark costume',
+    description: 'A playful costume for photo days and tiny adventures.',
+    category: 'Garments',
+    type: ProductType.garment,
+    priceMinor: 69900,
+    images: const ['assets/images/products/garments/cat/cat_shark_costume.jpg'],
+    rating: 4.6,
+    reviewCount: 17,
+    stock: 10,
+    variants: _garmentVariants('shark'),
+  ),
+  Product(
+    id: 'coach-collar',
+    name: 'Polka leather collar',
+    description: 'A polished leather collar with a little bone charm.',
+    category: 'Collars & Harnesses',
+    type: ProductType.general,
+    priceMinor: 350000,
+    images: const [
+      'assets/images/products/collars/collar_coach_polka_leather.jpg'
+    ],
+    rating: 4.9,
+    reviewCount: 27,
+    stock: 15,
+  ),
+  Product(
+    id: 'maca-collar',
+    name: 'Chocolate bow collar',
+    description: 'A cheerful polka dot collar with a bow charm.',
+    category: 'Collars & Harnesses',
+    type: ProductType.general,
+    priceMinor: 69900,
+    images: const [
+      'assets/images/products/collars/collar_maca_bates_chocolate.jpg'
+    ],
+    rating: 4.8,
+    reviewCount: 18,
+    stock: 15,
+  ),
+  Product(
+    id: 'ladybug-collar',
+    name: 'Mint ladybug collar',
+    description: 'A bright fabric collar with a secure gold buckle.',
+    category: 'Collars & Harnesses',
+    type: ProductType.general,
+    priceMinor: 59900,
+    images: const ['assets/images/products/collars/collar_ladybug_mint.jpg'],
+    rating: 4.7,
+    reviewCount: 12,
+    stock: 15,
+  ),
+  Product(
+    id: 'pastel-donut-bed',
+    name: 'Pastel donut bed',
+    description: 'A soft round nest with a matching bone cushion.',
+    category: 'Beds',
+    type: ProductType.general,
+    priceMinor: 220000,
+    images: const ['assets/images/products/beds/bed_pastel_donut.jpg'],
+    rating: 4.9,
+    reviewCount: 31,
+    stock: 7,
+  ),
+  Product(
+    id: 'checkered-bed',
+    name: 'Checkered bolster bed',
+    description: 'Plush support for deep, happy naps.',
+    category: 'Beds',
+    type: ProductType.general,
+    priceMinor: 250000,
+    images: const ['assets/images/products/beds/bed_checkered_bolster.jpg'],
+    rating: 4.8,
+    reviewCount: 22,
+    stock: 7,
+  ),
+  Product(
+    id: 'strawberry-bed',
+    name: 'Strawberry plush bed',
+    description: 'A whimsical strawberry-shaped spot with a daisy accent.',
+    category: 'Beds',
+    type: ProductType.general,
+    priceMinor: 130000,
+    images: const ['assets/images/products/beds/bed_strawberry_plush.jpg'],
+    rating: 4.7,
+    reviewCount: 15,
+    stock: 8,
+  ),
+  Product(
+    id: 'double-bowl',
+    name: 'Double water bowl',
+    description: 'A tidy feeding station with a helpful water dispenser.',
+    category: 'Feeding',
+    type: ProductType.general,
+    priceMinor: 89900,
+    images: const ['assets/images/products/feeding/bowl_azwraith_double.jpg'],
+    rating: 4.6,
+    reviewCount: 16,
+    stock: 12,
+  ),
+  Product(
+    id: 'coco-bowl',
+    name: 'Coco bow bowl',
+    description: 'Quilted faux leather outside, easy-clean steel inside.',
+    category: 'Feeding',
+    type: ProductType.general,
+    priceMinor: 99900,
+    images: const ['assets/images/products/feeding/bowl_coco_bow_quilted.jpg'],
+    rating: 4.8,
+    reviewCount: 20,
+    stock: 12,
+  ),
+  Product(
+    id: 'enamel-bowl',
+    name: 'Pink enamel bowl',
+    description: 'A bright, sturdy bowl for everyday meals.',
+    category: 'Feeding',
+    type: ProductType.general,
+    priceMinor: 89900,
+    images: const ['assets/images/products/feeding/bowl_enamel_pink_white.jpg'],
+    rating: 4.7,
+    reviewCount: 11,
+    stock: 10,
+  ),
+  Product(
+    id: 'rosy-bowl',
+    name: 'Rosy check dish',
+    description: 'A charming medium dish for food and water.',
+    category: 'Feeding',
+    type: ProductType.general,
+    priceMinor: 119900,
+    images: const ['assets/images/products/feeding/bowl_rosy_check.jpg'],
+    rating: 4.8,
+    reviewCount: 13,
+    stock: 10,
+  ),
+  Product(
+    id: 'harness-collar',
+    name: 'Harness & collar',
+    description: 'Choose a breathable strawberry harness or bow collar.',
+    category: 'Collars & Harnesses',
+    type: ProductType.general,
+    priceMinor: 80000,
+    images: const [
+      'assets/images/products/harness/harness_strawberry_mesh.jpg'
+    ],
+    rating: 4.8,
+    reviewCount: 22,
+    stock: 10,
+    styles: [
+      ProductStyle(
+          id: 'strawberry-mesh',
+          label: 'Strawberry mesh harness',
+          image: 'assets/images/products/harness/harness_strawberry_mesh.jpg',
+          priceMinor: 80000),
+      ProductStyle(
+          id: 'bow-charm',
+          label: 'Bow-charm collar',
+          image:
+              'assets/images/products/harness/collar_maca_bates_bow_charm.jpg',
+          priceMinor: 99900),
+    ],
+  ),
+  Product(
+    id: 'pet-shampoo',
+    name: 'Pet shampoo',
+    description: 'Choose a gentle, fresh-smelling bath-time favorite.',
+    category: 'Grooming',
+    type: ProductType.general,
+    priceMinor: 280000,
+    images: const ['assets/images/products/grooming/shampoo_dedcool.jpg'],
+    rating: 4.7,
+    reviewCount: 18,
+    stock: 10,
+    styles: [
+      ProductStyle(
+          id: 'dedcool',
+          label: 'DedCool Taunt',
+          image: 'assets/images/products/grooming/shampoo_dedcool.jpg',
+          priceMinor: 300000),
+      ProductStyle(
+          id: 'ouai',
+          label: 'OUAI Fur Bébé',
+          image: 'assets/images/products/grooming/shampoo_ouai_fur_bebe.jpg',
+          priceMinor: 280000),
+    ],
+  ),
+  Product(
+    id: 'scratching-post',
+    name: 'Cat scratching post & tree',
+    description: 'Pick the playful lollipop or space-saving tree.',
+    category: 'Toys',
+    type: ProductType.general,
+    priceMinor: 99900,
+    images: const [
+      'assets/images/products/toys/scratch_post_pink_lollipop.jpg'
+    ],
+    rating: 4.7,
+    reviewCount: 18,
+    stock: 10,
+    styles: [
+      ProductStyle(
+          id: 'lollipop',
+          label: 'Pink lollipop post',
+          image: 'assets/images/products/toys/scratch_post_pink_lollipop.jpg',
+          priceMinor: 99900),
+      ProductStyle(
+          id: 'beige-tree',
+          label: 'Beige sisal tree',
+          image: 'assets/images/products/toys/cat_tree_beige_sisal.jpg',
+          priceMinor: 250000),
+    ],
+  ),
+  Product(
+    id: 'pet-carrier',
+    name: 'Pet carrier',
+    description: 'Two stylish, practical ways to travel together.',
+    category: 'Travel',
+    type: ProductType.general,
+    priceMinor: 280000,
+    images: const [
+      'assets/images/products/travel/carrier_pink_glitter_purse.jpg'
+    ],
+    rating: 4.8,
+    reviewCount: 16,
+    stock: 10,
+    styles: [
+      ProductStyle(
+          id: 'glitter-purse',
+          label: 'Pink glitter purse',
+          image: 'assets/images/products/travel/carrier_pink_glitter_purse.jpg',
+          priceMinor: 450000),
+      ProductStyle(
+          id: 'puffer-tote',
+          label: 'Quilted puffer tote',
+          image:
+              'assets/images/products/travel/carrier_quilted_puffer_tote.jpg',
+          priceMinor: 280000),
+    ],
+  ),
+];
